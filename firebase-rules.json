@@ -1,0 +1,19 @@
+{
+  "rules": {
+    "damesRooms": {
+      "$roomId": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "hostId": { ".validate": "newData.isString()" },
+        "players": {
+          "$uid": {
+            ".validate": "newData.hasChildren(['name','side']) && newData.child('name').isString() && newData.child('name').val().length > 0 && newData.child('name').val().length <= 20 && (newData.child('side').val() === 1 || newData.child('side').val() === 2)"
+          }
+        },
+        "game": {
+          ".validate": "newData.hasChildren(['board','turn','mandatory','status'])"
+        }
+      }
+    }
+  }
+}

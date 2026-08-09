@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10100f">
+  <title>Dames V3.1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>DAMES</h1>
+  <button id="menuBtn" aria-label="Menu">☰</button>
+</header>
+
+<main>
+  <section class="top">
+    <div class="controls">
+      <button id="newBtn">Nouvelle partie</button>
+      <select id="mode" aria-label="Mode de jeu">
+        <option value="ai">Solo vs IA</option>
+        <option value="local">2 joueurs local</option>
+        <option value="online">Multijoueur en ligne</option>
+      </select>
+      <select id="level" aria-label="Difficulté de l'IA">
+        <option value="easy">Facile</option>
+        <option value="medium">Moyen</option>
+        <option value="hard">Farouche</option>
+      </select>
+    </div>
+    <div id="status">À vous de jouer</div>
+  </section>
+
+  <section id="onlinePanel" class="online hidden">
+    <h2>Multijoueur</h2>
+    <div class="nameRow">
+      <input id="playerName" maxlength="20" placeholder="Votre nom" autocomplete="name">
+      <button id="saveName">OK</button>
+    </div>
+    <div class="onlineActions">
+      <button id="createRoom">Créer un salon</button>
+      <span>ou</span>
+      <input id="roomCode" maxlength="6" placeholder="CODE" autocomplete="off">
+      <button id="joinRoom">Rejoindre</button>
+    </div>
+    <div id="roomInfo" class="hidden">
+      <div class="roomLine">Salon : <b id="shownCode"></b> <button id="copyLink">Partager le lien</button></div>
+      <div id="onlineMsg">En attente d'un adversaire…</div>
+      <button id="startOnline" class="startOnline hidden" disabled>Lancer la partie</button>
+    </div>
+  </section>
+
+  <section class="game">
+    <div class="player opponent">
+      <span class="dot black"></span><b id="p2name">IA</b><span id="p2count">20</span>
+    </div>
+    <div id="board" aria-label="Damier"></div>
+    <div id="captureBanner" aria-live="polite"></div>
+    <div class="player">
+      <span class="dot white"></span><b id="p1name">Joueur</b><span id="p1count">20</span>
+    </div>
+  </section>
+
+  <section id="winner" class="winner hidden">
+    <h2 id="winnerText"></h2>
+    <div><button id="rematch">Revanche</button><button id="home">Accueil</button></div>
+  </section>
+</main>
+
+<aside id="menu" class="menu hidden">
+  <div class="menuHead"><h2>Paramètres</h2><button id="closeMenu">✕</button></div>
+  <label><input id="sound" type="checkbox" checked> Sons</label>
+  <label><input id="hints" type="checkbox" checked> Aides visuelles</label>
+  <label><input id="mandatory" type="checkbox" checked> Prise obligatoire</label>
+  <label>Thème
+    <select id="theme"><option value="dark">Sombre</option><option value="light">Clair</option></select>
+  </label>
+  <button id="rulesBtn">Règles du jeu</button>
+  <button id="resetSave">Effacer la partie sauvegardée</button>
+</aside>
+
+<dialog id="rules">
+  <button class="dialogClose" id="rulesClose">✕</button>
+  <h2>Règles du jeu</h2>
+  <p>Cette version utilise le damier international 10 × 10. Chaque joueur commence avec 20 pions sur les cases foncées.</p>
+  <h3>Déplacement</h3>
+  <p>Un pion avance d'une case en diagonale. Lorsqu'il atteint la dernière rangée adverse, il devient une dame. Une dame se déplace librement en diagonale sur plusieurs cases.</p>
+  <h3>Prise</h3>
+  <p>Un pion capture en sautant par-dessus un pion adverse vers une case libre, vers l'avant ou l'arrière. Une dame peut capturer à distance. Si une nouvelle prise est possible après un saut, la rafle continue avec la même pièce.</p>
+  <p>Quand « Prise obligatoire » est activée, une prise disponible doit être jouée. Désactivez-la pour une variante libre.</p>
+  <h3>Victoire</h3>
+  <p>Vous gagnez lorsque l'adversaire n'a plus de pièce ou ne peut plus jouer.</p>
+  <h3>Multijoueur</h3>
+  <p>L'hôte crée le salon et partage le code ou le lien. Après l'arrivée du deuxième joueur, l'hôte appuie sur « Lancer la partie ». Sur l'écran de l'invité, le damier est automatiquement retourné afin que son camp reste en bas.</p>
+</dialog>
+
+<canvas id="confetti"></canvas>
+<footer>by twagirumukiza</footer>
+<script type="module" src="script.js"></script>
+</body>
+</html>
